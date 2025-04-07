@@ -25,4 +25,14 @@ public class LocationController {
         System.out.println("OUT");
         return ResponseEntity.ok(Map.of("message", "Location updated"));
     }
+
+    @PostMapping("employee")
+    public ResponseEntity sendEmployee() {
+        System.out.println("INN");
+        for (int i = 1; i <= 1; i++) {
+            kafkaService.sendEmployee((int) (Math.random() * 100));
+        }
+        System.out.println("OUT");
+        return ResponseEntity.ok(Map.of("message", "employee updated"));
+    }
 }

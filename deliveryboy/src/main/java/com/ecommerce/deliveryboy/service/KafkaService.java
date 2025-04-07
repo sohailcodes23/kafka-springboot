@@ -9,11 +9,23 @@ import org.springframework.stereotype.Service;
 public class KafkaService {
 
     @Autowired
-    public KafkaTemplate<String, String> kafkaTemplate;// <String, String> Here the key is the topic name and value can be any type of data
+    public KafkaTemplate<Object, common.dto.Employee> kafkaTemplate;// <String, Employee> Here the key is the topic name and value can be any type of data
+
+    @Autowired
+    public KafkaTemplate<String, String> strKafkaTemplate;// <String, String> Here the key is the topic name and value can be any type of data
+
 
     public boolean updateLocation(String location) {
 
-        kafkaTemplate.send(KafkaConfig.topicName, location);
+        strKafkaTemplate.send(KafkaConfig.topicName, location);
+
+        return true;
+    }
+
+    public boolean sendEmployee(int age) {
+
+        common.dto.Employee employee = new common.dto.Employee("Employee " + age, age);
+        kafkaTemplate.send(KafkaConfig.employeeTopicName, employee);
 
         return true;
     }
