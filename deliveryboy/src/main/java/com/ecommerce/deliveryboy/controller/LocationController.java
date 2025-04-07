@@ -18,11 +18,11 @@ public class LocationController {
 
     @PostMapping
     public ResponseEntity updateLocation() {
-
+        System.out.println("INN");
         for (int i = 1; i <= 10; i++) {
             kafkaService.updateLocation("Location " + i + " " + Math.random() * 100);
         }
-
+        System.out.println("OUT");
         return ResponseEntity.ok(Map.of("message", "Location updated"));
     }
 }
